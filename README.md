@@ -1,10 +1,14 @@
-# Simple React Application
+# Material UI React Application
 
-This is a modern React application featuring:
-- Clean and responsive design
-- Interactive counter with heart animation
-- Tailwind CSS for styling
-- shadcn/ui components
+A modern React application featuring Material UI with dark theme support.
+
+## Features
+
+- Material UI components and styling
+- Dark/Light theme toggle
+- Interactive counter with Material icons
+- Responsive design
+- Clean component structure
 
 ## Getting Started
 
@@ -12,9 +16,17 @@ This is a modern React application featuring:
 2. Install dependencies: `npm install`
 3. Start the development server: `npm start`
 
-## Features
+## Changes in this PR
 
-- Interactive counter with visual feedback
-- Modern UI components
-- Responsive design
-- Clean and maintainable code structure
+- Replaced shadcn/ui with Material UI
+- Added dark/light theme toggle
+- Updated styling to follow Material Design principles
+- Enhanced visual feedback with Material icons
+- Improved component organization
+
+## Theme Features
+
+- Automatic dark/light mode switching
+- Custom color palette
+- Consistent spacing and typography
+- Material Design elevation

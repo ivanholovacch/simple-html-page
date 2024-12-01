@@ -1,52 +1,90 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Heart } from 'lucide-react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { Card, CardContent, Typography, IconButton, Box, Switch, Container } from '@mui/material';
+import { Add as AddIcon, Remove as RemoveIcon, Favorite as FavoriteIcon } from '@mui/icons-material';
 
 const App = () => {
   const [count, setCount] = useState(0);
-  
+  const [darkMode, setDarkMode] = useState(false);
+
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+      primary: {
+        main: '#90caf9',
+      },
+      secondary: {
+        main: '#f48fb1',
+      },
+    },
+  });
+
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-4xl mx-auto">
-        <Card className="bg-white shadow-lg">
-          <CardHeader>
-            <h1 className="text-3xl font-bold text-center text-gray-800">
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container maxWidth="sm" sx={{ minHeight: '100vh', py: 4 }}>
+        <Card elevation={8} sx={{ position: 'relative', overflow: 'visible' }}>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 16,
+              right: 16,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1,
+            }}
+          >
+            <Typography variant="body2">
+              {darkMode ? 'Dark' : 'Light'} Mode
+            </Typography>
+            <Switch
+              checked={darkMode}
+              onChange={() => setDarkMode(!darkMode)}
+              color="primary"
+            />
+          </Box>
+          
+          <CardContent sx={{ textAlign: 'center', pt: 8 }}>
+            <Typography variant="h3" gutterBottom>
               Welcome to My React App
-            </h1>
-            <p className="text-center text-gray-600 mt-2">
-              A simple yet elegant React application
-            </p>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-col items-center gap-4">
-              <div className="flex items-center gap-2">
-                <Heart 
-                  className={`w-8 h-8 ${count > 0 ? 'text-red-500' : 'text-gray-400'}`}
-                  fill={count > 0 ? 'currentColor' : 'none'}
+            </Typography>
+            <Typography variant="subtitle1" color="text.secondary" gutterBottom>
+              A Material UI themed application
+            </Typography>
+            
+            <Box sx={{ mt: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <FavoriteIcon
+                  color={count > 0 ? 'error' : 'disabled'}
+                  sx={{ fontSize: 40 }}
                 />
-                <span className="text-xl font-semibold">{count}</span>
-              </div>
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
+                <Typography variant="h4">{count}</Typography>
+              </Box>
+              
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                <IconButton
                   onClick={() => setCount(c => Math.max(0, c - 1))}
-                  className="px-4"
+                  color="primary"
+                  size="large"
+                  sx={{ border: 1, borderColor: 'primary.main' }}
                 >
-                  Decrease
-                </Button>
-                <Button
+                  <RemoveIcon />
+                </IconButton>
+                <IconButton
                   onClick={() => setCount(c => c + 1)}
-                  className="px-4 bg-blue-500 hover:bg-blue-600"
+                  color="primary"
+                  size="large"
+                  sx={{ border: 1, borderColor: 'primary.main' }}
                 >
-                  Increase
-                </Button>
-              </div>
-            </div>
+                  <AddIcon />
+                </IconButton>
+              </Box>
+            </Box>
           </CardContent>
         </Card>
-      </div>
-    </div>
+      </Container>
+    </ThemeProvider>
   );
 };
 
